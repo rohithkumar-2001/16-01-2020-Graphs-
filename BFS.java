@@ -38,20 +38,22 @@ class Solution
 {
     public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj)
     {
-        boolean prev[]=new boolean[V];
-        Queue<Integer> pres=new LinkedList<>();
+        boolean []visited =new boolean[V];
+        Queue<Integer> queue=new LinkedList<>();
         ArrayList<Integer> result=new ArrayList<>();
-        prev[0]=true;
-        pres.add(0);
-        while(!pres.isEmpty()){
-            int temp=pres.poll();
-            result.add(temp);
-            Iterator<Integer> it=adj.get(temp).iterator();
-            while(it.hasNext()){
-                int n=it.next();
-                if(!prev[n]){
-                    prev[n]=true;
-                    pres.add(n);
+        visisted[0]=true;
+        queue.add(0);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i=0;i<size;i++){     //This for loop is for handling all nodes at same distance from start.  
+                int curr=queue.poll();
+                result.add(curr);
+                for(Integer neighbour:adj.get(curr)){
+                    if(!visited[neighbour]){
+                        visited[neighbour]=true;
+                        queue.add(neighbour);
+                        result.add(neighbour);
+                    }
                 }
             }
         }
