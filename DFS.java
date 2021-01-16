@@ -35,22 +35,20 @@ class GFG
 
 
 class Solution
-{   public int s=0;
+{
+    private ArrayList<Integer> result=new ArrayList<>();
     public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj)
     {
         boolean visited[]=new boolean[V];
-        ArrayList<Integer> result=new ArrayList<>();
-        dFS(s,adj,result,visited);
+        dFS(0,adj,visited);
         return result;
     }
-    public static void dFS(int s,ArrayList<ArrayList<Integer>> adj,ArrayList<Integer> result,boolean visited[]){
+    public void dFS(int s,ArrayList<ArrayList<Integer>> adj,boolean visited[]){
         visited[s]=true;
         result.add(s);
-        Iterator<Integer> it=adj.get(s).iterator();
-        while(it.hasNext()){
-            int num=it.next();
-            if(!visited[num]){
-                dFS(num,adj,result,visited);
+        for(Integer neighbour:adj.get(s)){
+            if(!visited[neighbour]){
+                dFS(neighbour,adj,visited);
             }
         }
     }
